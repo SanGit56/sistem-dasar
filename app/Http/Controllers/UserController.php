@@ -10,7 +10,7 @@ class UserController extends Controller
     public function show()
     {
         $pengguna = User::all();
-        dd($pengguna);
-        // return view('user', ['pengguna' => $pengguna]);
+        
+        return view('user.index', ['pengguna' => $pengguna]);
     }
 }

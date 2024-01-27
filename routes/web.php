@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -19,3 +21,5 @@ Route::get('/', function () {
 });
 
 Route::get('/user', [UserController::class, 'show']);
+Route::get('/role', [RoleController::class, 'show']);
+Route::get('/menu', [MenuController::class, 'show']);
