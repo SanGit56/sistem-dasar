@@ -14,13 +14,15 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::insert([
-            'username' => 'nama pengguna',
-            'name' => 'nama',
-            'email' => 'surel juga',
-            'password' => 'kata sandi',
-            'status' => false,
-            'created_at' => Carbon::now()
-        ]);
+        User::factory()->count(5)->create();
+
+        // User::insert([
+        //     'username' => 'nama pengguna',
+        //     'name' => 'nama',
+        //     'email' => 'surel juga',
+        //     'password' => 'kata sandi',
+        //     'status' => false,
+        //     'created_at' => Carbon::now()
+        // ]);
     }
 }
