@@ -1,18 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pengguna</title>
-</head>
-<body>
-    <center>
-        <h1>Selamat Datang</h1>
-        <p>Ini adalah halaman pengguna sederhana yang dibuat menggunakan HTML</p>
-        
-        @foreach ($pengguna as $pgn)
-            <p>{{ $pgn }}</p>
-        @endforeach
-    </center>
-</body>
-</html>
+@extends('layout/main')
+
+@section('container')
+  <p>Ini adalah halaman {{ $judul }} sederhana yang dibuat menggunakan HTML</p>
+
+  <table border=1>
+    <tr>
+        <th>id</th>
+        <th>username</th>
+        <th>name</th>
+        <th>email</th>
+        <th>password</th>
+        <th>status</th>
+    </tr>
+
+      @foreach ($pengguna as $pgn)
+        <tr>
+            <td>{{ $pgn->id }}</td>
+            <td>{{ $pgn->username }}</td>
+            <td>{{ $pgn->name }}</td>
+            <td>{{ $pgn->email }}</td>
+            <td>{{ $pgn->password }}</td>
+            <td>{{ $pgn->status }}</td>
+        </tr>
+      @endforeach
+  </table>
+@endsection

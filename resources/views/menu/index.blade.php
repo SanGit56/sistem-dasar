@@ -1,18 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu</title>
-</head>
-<body>
-    <center>
-        <h1>Selamat Datang</h1>
-        <p>Ini adalah halaman menu sederhana yang dibuat menggunakan HTML</p>
-        
-        @foreach ($menu as $mn)
-            <p>{{ $mn }}</p>
-        @endforeach
-    </center>
-</body>
-</html>
+@extends('layout/main')
+
+@section('container')
+  <p>Ini adalah halaman {{ $judul }} sederhana yang dibuat menggunakan HTML</p>
+
+  <table border=1>
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>description</th>
+    </tr>
+
+      @foreach ($menu as $mn)
+        <tr>
+            <td>{{ $mn->id }}</td>
+            <td>{{ $mn->name }}</td>
+            <td>{{ $mn->description }}</td>
+        </tr>
+      @endforeach
+  </table>
+@endsection

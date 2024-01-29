@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beranda</title>
-</head>
-<body>
-    <center>
-        <h1>Selamat Datang</h1>
-        <p>Ini adalah halaman selamat datang sederhana yang dibuat menggunakan HTML</p>
-    </center>
-</body>
-</html>
+@extends('layout/main')
+
+@section('container')
+  <p>Ini adalah halaman {{ $judul }} sederhana yang dibuat menggunakan HTML</p>
+@endsection

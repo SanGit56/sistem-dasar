@@ -11,6 +11,6 @@ class RoleController extends Controller
     {
         $peran = Role::all();
         
-        return view('role.index', ['peran' => $peran]);
+        return view('role.index', ['judul' => 'Peran', 'peran' => $peran]);
     }
 }
