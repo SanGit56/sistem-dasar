@@ -9,7 +9,7 @@ class RoleController extends Controller
 {
     public function show()
     {
-        $peran = Role::all();
+        $peran = Role::with(['users', 'menus'])->get();
         
         return view('role.index', ['judul' => 'Peran', 'peran' => $peran]);
     }

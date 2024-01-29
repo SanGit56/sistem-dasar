@@ -9,5 +9,8 @@ class Menu extends Model
 {
     use HasFactory;
 
-    // protected $table = 'menus';      opsional. perlu jika nama tabel tidak sama atau bukan bentuk jamak dari nama model
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'role_menu', 'menu_id', 'role_id');
+    }
 }

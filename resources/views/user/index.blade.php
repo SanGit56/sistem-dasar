@@ -11,8 +11,10 @@
         <th>email</th>
         <th>password</th>
         <th>status</th>
-        <th>profile_picture</th>
-        <th>remember_token</th>
+        <th>user_role</th>
+
+        {{-- <th>profile_picture</th> --}}
+        {{-- <th>remember_token</th> --}}
     </tr>
 
       @foreach ($pengguna as $pgn)
@@ -23,8 +25,14 @@
             <td>{{ $pgn->email }}</td>
             <td>{{ $pgn->password }}</td>
             <td>{{ $pgn->status }}</td>
-            <td>{{ $pgn->profile_picture }}</td>
-            <td>{{ $pgn->remember_token }}</td>
+            <td>
+              @foreach ($pgn->roles as $pgn_prn)
+                  - {{ $pgn_prn->id }} {{ $pgn_prn->name }} <br>
+              @endforeach
+            </td>
+
+            {{-- <td>{{ $pgn->profile_picture }}</td> --}}
+            {{-- <td>{{ $pgn->remember_token }}</td> --}}
         </tr>
       @endforeach
   </table>

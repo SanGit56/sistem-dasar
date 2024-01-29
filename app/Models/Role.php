@@ -2,12 +2,21 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Role extends Model
 {
     use HasFactory;
 
-    // protected $table = 'roles';      opsional. perlu jika nama tabel tidak sama atau bukan bentuk jamak dari nama model
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_role', 'role_id', 'user_id');
+    }
+
+    public function menus()
+    {
+        return $this->belongsToMany(Menu::class, 'role_menu', 'role_id', 'menu_id');
+    }
 }

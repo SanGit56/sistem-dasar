@@ -9,7 +9,7 @@ class MenuController extends Controller
 {
     public function show()
     {
-        $menu = Menu::all();
+        $menu = Menu::with('roles')->get();
         
         return view('menu.index', ['judul' => 'Menu', 'menu' => $menu]);
     }
