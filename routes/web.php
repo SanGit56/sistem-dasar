@@ -1,9 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LogController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SubmenuController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +25,5 @@ Route::get('/', function () {
 Route::get('/user', [UserController::class, 'show']);
 Route::get('/role', [RoleController::class, 'show']);
 Route::get('/menu', [MenuController::class, 'show']);
+Route::get('/log', [LogController::class, 'show']);
+Route::get('/submenu', [SubmenuController::class, 'show']);
