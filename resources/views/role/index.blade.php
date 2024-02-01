@@ -8,8 +8,7 @@
         <th>id</th>
         <th>name</th>
         <th>description</th>
-        <th>user_role</th>
-        <th>role_menu</th>
+        <th>aksi</th>
     </tr>
 
       @foreach ($peran as $prn)
@@ -17,16 +16,7 @@
             <td>{{ $prn->id }}</td>
             <td>{{ $prn->name }}</td>
             <td>{{ $prn->description }}</td>
-            <td>
-              @foreach ($prn->users as $prn_pgn)
-                  - {{ $prn_pgn->id }} {{ $prn_pgn->username }} <br>
-              @endforeach
-            </td>
-            <td>
-              @foreach ($prn->menus as $prn_mn)
-                  - {{ $prn_mn->id }} {{ $prn_mn->name }} <br>
-              @endforeach
-            </td>
+            <td><a href="">detail</a></td>
         </tr>
       @endforeach
   </table>

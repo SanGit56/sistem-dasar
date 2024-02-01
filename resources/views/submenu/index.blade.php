@@ -7,20 +7,20 @@
     <tr>
         <th>id</th>
         <th>menu_id</th>
-        <th>menu</th>
         <th>name</th>
         <th>position</th>
         <th>is_active</th>
+        <th>aksi</th>
     </tr>
 
       @foreach ($submenu as $sm)
         <tr>
             <td>{{ $sm->id }}</td>
             <td>{{ $sm->menu_id }}</td>
-            <td>{{ $sm->menu['name'] }}</td>
             <td>{{ $sm->name }}</td>
             <td>{{ $sm->position }}</td>
             <td>{{ $sm->is_active }}</td>
+            <td><a href="">detail</a></td>
         </tr>
       @endforeach
   </table>

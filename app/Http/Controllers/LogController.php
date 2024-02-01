@@ -9,7 +9,7 @@ class LogController extends Controller
 {
     public function show()
     {
-        $catatan = Log::with('user')->get();
+        $catatan = Log::get();
         
         return view('log.index', ['judul' => 'Catatan', 'catat' => $catatan]);
     }

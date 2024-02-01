@@ -8,7 +8,7 @@
         <th>id</th>
         <th>name</th>
         <th>description</th>
-        <th>role_menu/th>
+        <th>aksi</th>
     </tr>
 
       @foreach ($menu as $mn)
@@ -16,11 +16,7 @@
             <td>{{ $mn->id }}</td>
             <td>{{ $mn->name }}</td>
             <td>{{ $mn->description }}</td>
-            <td>
-              @foreach ($mn->roles as $mn_prn)
-                  - {{ $mn_prn->id }} {{ $mn_prn->name }} <br>
-              @endforeach
-            </td>
+            <td><a href="">detail</a></td>
         </tr>
       @endforeach
   </table>

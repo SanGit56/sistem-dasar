@@ -9,7 +9,7 @@ class SubmenuController extends Controller
 {
     public function show()
     {
-        $submenu = Submenu::with('menu')->get();
+        $submenu = Submenu::get();
         
         return view('submenu.index', ['judul' => 'Submenu', 'submenu' => $submenu]);
     }

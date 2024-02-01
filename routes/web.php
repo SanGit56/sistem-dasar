@@ -22,7 +22,9 @@ Route::get('/', function () {
     return view('home', ['judul' => 'Beranda']);
 });
 
-Route::get('/user', [UserController::class, 'show']);
+Route::get('/user', [UserController::class, 'index']);
+Route::get('/user/{id}', [UserController::class, 'show']);
+
 Route::get('/role', [RoleController::class, 'show']);
 Route::get('/menu', [MenuController::class, 'show']);
 Route::get('/log', [LogController::class, 'show']);
