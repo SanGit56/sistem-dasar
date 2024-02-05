@@ -22,4 +22,25 @@ class UserController extends Controller
 
         return view('user.detail', ['judul' => 'Pengguna ' . $id, 'pengguna' => $pengguna, 'peran' => $peran]);
     }
+
+    public function create()
+    {
+        return view('user.add', ['judul' => 'Tambah Pengguna']);
+    }
+
+    public function store(Request $request)
+    {
+        $pengguna = new User;
+
+        $pengguna->username = $request->namapengguna;
+        $pengguna->name = $request->nama;
+        $pengguna->email = $request->surel;
+        $pengguna->password = $request->katasandi;
+        $pengguna->status = ($request->status == 'on') ? 1 : 0;
+        $pengguna->profile_picture = $request->foto;
+        $pengguna->remember_token = csrf_token();
+        $pengguna->save();
+
+        return redirect('/user');
+    }
 }

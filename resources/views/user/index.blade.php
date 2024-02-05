@@ -1,6 +1,8 @@
 @extends('layout/main')
 
 @section('container')
+  <a href="/user-add">tambah</a>
+
   <p>Ini adalah halaman {{ $judul }} sederhana yang dibuat menggunakan HTML</p>
 
   <table border=1>

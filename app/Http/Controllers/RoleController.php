@@ -13,4 +13,16 @@ class RoleController extends Controller
         
         return view('role.index', ['judul' => 'Peran', 'peran' => $peran]);
     }
+
+    public function create()
+    {
+        return view('role.add', ['judul' => 'Tambah Peran']);
+    }
+
+    public function store(Request $request)
+    {
+        Role::create($request->all());
+
+        return redirect('/role');
+    }
 }
