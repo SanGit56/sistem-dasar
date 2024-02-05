@@ -43,4 +43,24 @@ class UserController extends Controller
 
         return redirect('/user');
     }
+
+    public function edit($id)
+    {
+        $pengguna = User::findOrFail($id);
+
+        return view('user.edit', ['judul' => 'Sunting Pengguna ' . $id, 'pengguna' => $pengguna]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $pengguna = User::findOrFail($id);
+
+        $pengguna->username = $request->namapengguna;
+        $pengguna->name = $request->nama;
+        $pengguna->email = $request->surel;
+        $pengguna->status = ($request->status == 'on') ? 1 : 0;
+        $pengguna->save();
+
+        return redirect('/user');
+    }
 }

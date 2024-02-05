@@ -22,7 +22,10 @@
             <td>{{ $sm->name }}</td>
             <td>{{ $sm->position }}</td>
             <td>{{ $sm->is_active }}</td>
-            <td><a href="">detail</a></td>
+            <td>
+              <a href="">detail</a>
+              <a href="/submenu-edit/{{ $sm->id }}">ubah</a>
+            </td>
         </tr>
       @endforeach
   </table>

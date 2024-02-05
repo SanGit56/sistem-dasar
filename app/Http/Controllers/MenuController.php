@@ -25,4 +25,20 @@ class MenuController extends Controller
 
         return redirect('/menu');
     }
+
+    public function edit($id)
+    {
+        $menu = Menu::findOrFail($id);
+
+        return view('menu.edit', ['judul' => 'Sunting Menu ' . $id, 'menu' => $menu]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $menu = Menu::findOrFail($id);
+
+        $menu->update($request->all());
+
+        return redirect('/menu');
+    }
 }

@@ -25,4 +25,20 @@ class RoleController extends Controller
 
         return redirect('/role');
     }
+
+    public function edit($id)
+    {
+        $peran = Role::findOrFail($id);
+
+        return view('role.edit', ['judul' => 'Sunting Peran ' . $id, 'peran' => $peran]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $peran = Role::findOrFail($id);
+
+        $peran->update($request->all());
+
+        return redirect('/role');
+    }
 }

@@ -18,7 +18,10 @@
             <td>{{ $mn->id }}</td>
             <td>{{ $mn->name }}</td>
             <td>{{ $mn->description }}</td>
-            <td><a href="">detail</a></td>
+            <td>
+              <a href="">detail</a>
+              <a href="/menu-edit/{{ $mn->id }}">ubah</a>
+            </td>
         </tr>
       @endforeach
   </table>

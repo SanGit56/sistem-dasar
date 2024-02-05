@@ -3,17 +3,18 @@
 @section('container')
     <p>Ini adalah halaman {{ $judul }} sederhana yang dibuat menggunakan HTML</p>
 
-    <form action="/role/insert" method="post" enctype="multipart/form-data" novalidate>
+    <form action="/role/update/{{ $peran->id }}" method="post" novalidate>
+        @method('PUT')
         @csrf
         
         <label for="nama">nama:</label>
-        <input type="text" id="nama" name="name" required maxlength="32">
+        <input type="text" id="nama" name="name" value="{{ $peran->name }}" required maxlength="32">
         <span class="error"></span>
 
         <br>
 
         <label for="deskripsi">deskripsi:</label>
-        <input type="text" id="deskripsi" name="description" maxlength="64">
+        <input type="text" id="deskripsi" name="description" value="{{ $peran->description }}" maxlength="64">
         <span class="error"></span>
 
         <br>

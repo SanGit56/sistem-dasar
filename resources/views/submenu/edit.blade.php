@@ -3,15 +3,14 @@
 @section('container')
     <p>Ini adalah halaman {{ $judul }} sederhana yang dibuat menggunakan HTML</p>
 
-    <form action="/submenu/insert" method="post" enctype="multipart/form-data" novalidate>
+    <form action="/submenu/update/{{ $submenu->id }}" method="post" novalidate>
+        @method('PUT')
         @csrf
         
         <label for="menu">menu:</label>
         <select id="menu" name="menu" required>
-            <option value="" disabled selected>--- pilih menu ---</option>
-
             @foreach ($menu as $mn)
-                <option value="{{ $mn->id }}">{{ $mn->name }}</option>
+                <option value="{{ $mn->id }}"  {{ ($mn->id == $submenu->menu_id) ? 'selected' : ''; }}>{{ $mn->name }}</option>
             @endforeach
         </select>
         <span class="error"></span>
@@ -19,19 +18,19 @@
         <br>
 
         <label for="nama">nama:</label>
-        <input type="text" id="nama" name="nama" required maxlength="32">
+        <input type="text" id="nama" name="nama" value="{{ $submenu->name }}" required maxlength="32">
         <span class="error"></span>
 
         <br>
 
         <label for="posisi">posisi:</label>
-        <input type="text" id="posisi" name="posisi" required maxlength="4">
+        <input type="text" id="posisi" name="posisi" value="{{ $submenu->position }}" required maxlength="4">
         <span class="error"></span>
 
         <br>
 
         <label for="aktif">aktif:</label>
-        <input type="checkbox" id="aktif" name="aktif">
+        <input type="checkbox" id="aktif" name="aktif" {{ ($submenu->is_active == 1) ? 'checked' : ''; }}>
 
         <br>
 

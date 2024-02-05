@@ -18,7 +18,10 @@
             <td>{{ $prn->id }}</td>
             <td>{{ $prn->name }}</td>
             <td>{{ $prn->description }}</td>
-            <td><a href="">detail</a></td>
+            <td>
+              <a href="">detail</a>
+              <a href="/role-edit/{{ $prn->id }}">ubah</a>
+            </td>
         </tr>
       @endforeach
   </table>

@@ -32,8 +32,7 @@
 
         nama.addEventListener("input", (event) => {
         if (nama.validity.valid) {  
-            namaError.textContent = ""; 
-            namaError.className = "error"; 
+            namaError.textContent = "";
         } else {
             showError();
         }
@@ -41,8 +40,7 @@
 
         deskripsi.addEventListener("input", (event) => {
         if (deskripsi.validity.valid) {  
-            deskripsiError.textContent = ""; 
-            deskripsiError.className = "error"; 
+            deskripsiError.textContent = "";
         } else {
             showError();
         }

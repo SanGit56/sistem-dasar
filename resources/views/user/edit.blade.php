@@ -3,46 +3,30 @@
 @section('container')
     <p>Ini adalah halaman {{ $judul }} sederhana yang dibuat menggunakan HTML</p>
 
-    <form action="/user/insert" method="post" enctype="multipart/form-data" novalidate>
+    <form action="/user/update/{{ $pengguna->id }}" method="post" novalidate>
+        @method('PUT')
         @csrf
         
         <label for="nama-pengguna">nama pengguna:</label>
-        <input type="text" id="nama-pengguna" name="namapengguna" required maxlength="16">
+        <input type="text" id="nama-pengguna" name="namapengguna" value="{{ $pengguna->username }}" required maxlength="16">
         <span class="error"></span>
 
         <br>
 
         <label for="nama">nama:</label>
-        <input type="text" id="nama" name="nama" required maxlength="64">
+        <input type="text" id="nama" name="nama" value="{{ $pengguna->name }}" required maxlength="64">
         <span class="error"></span>
 
         <br>
 
         <label for="surel">surel:</label>
-        <input type="email" id="surel" name="surel" required maxlength="64">
-        <span class="error"></span>
-
-        <br>
-
-        <label for="kata-sandi">kata sandi:</label>
-        <input type="password" id="kata-sandi" name="katasandi" required minlength="8">
-        <span class="error"></span>
-
-        <br>
-
-        <label for="sandi-lagi">ketik ulang kata sandi:</label>
-        <input type="password" id="sandi-lagi" name="sandilagi" required minlength="8" onchange="cekSandi()">
+        <input type="email" id="surel" name="surel" value="{{ $pengguna->email }}" required maxlength="64">
         <span class="error"></span>
 
         <br>
 
         <label for="status">Status:</label>
-        <input type="checkbox" id="status" name="status">
-
-        <br>
-
-        <label for="foto">unggah foto:</label>
-        <input type="file" id="foto" name="foto" accept="image/*">
+        <input type="checkbox" id="status" name="status" {{ ($pengguna->status == 1) ? 'checked' : ''; }}>
 
         <br>
 

@@ -3,17 +3,18 @@
 @section('container')
     <p>Ini adalah halaman {{ $judul }} sederhana yang dibuat menggunakan HTML</p>
 
-    <form action="/role/insert" method="post" enctype="multipart/form-data" novalidate>
+    <form action="/menu/update/{{ $menu->id }}" method="post" novalidate>
+        @method('PUT')
         @csrf
         
         <label for="nama">nama:</label>
-        <input type="text" id="nama" name="name" required maxlength="32">
+        <input type="text" id="nama" name="name" value="{{ $menu->name }}" required maxlength="32">
         <span class="error"></span>
 
         <br>
 
         <label for="deskripsi">deskripsi:</label>
-        <input type="text" id="deskripsi" name="description" maxlength="64">
+        <input type="text" id="deskripsi" name="description" value="{{ $menu->description }}" maxlength="64">
         <span class="error"></span>
 
         <br>
@@ -21,7 +22,7 @@
         <input type="submit" value="kirim">
     </form>
 
-    <a href="../role">kembali</a>
+    <a href="../menu">kembali</a>
 
     <script>
         const form = document.querySelector("form");

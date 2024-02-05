@@ -24,7 +24,10 @@
             <td>{{ $pgn->email }}</td>
             <td>{{ $pgn->password }}</td>
             <td>{{ $pgn->status }}</td>
-            <td><a href="user/{{ $pgn->id }}">detail</a></td>
+            <td>
+              <a href="user/{{ $pgn->id }}">detail</a>
+              <a href="/user-edit/{{ $pgn->id }}">ubah</a>
+            </td>
         </tr>
       @endforeach
   </table>
