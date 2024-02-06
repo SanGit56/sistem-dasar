@@ -3,24 +3,32 @@
 @section('container')
     <p>Ini adalah halaman {{ $judul }} sederhana yang dibuat menggunakan HTML</p>
 
+    @if ($errors->any())
+        @foreach ($errors->all() as $err)
+            {{ $err }} <br>
+        @endforeach
+
+        <br>
+    @endif
+
     <form action="/user/update/{{ $pengguna->id }}" method="post" novalidate>
         @method('PUT')
         @csrf
         
         <label for="nama-pengguna">nama pengguna:</label>
-        <input type="text" id="nama-pengguna" name="namapengguna" value="{{ $pengguna->username }}" required maxlength="16">
+        <input type="text" id="nama-pengguna" name="username" value="{{ $pengguna->username }}" required maxlength="16">
         <span class="error"></span>
 
         <br>
 
         <label for="nama">nama:</label>
-        <input type="text" id="nama" name="nama" value="{{ $pengguna->name }}" required maxlength="64">
+        <input type="text" id="nama" name="name" value="{{ $pengguna->name }}" required maxlength="64">
         <span class="error"></span>
 
         <br>
 
         <label for="surel">surel:</label>
-        <input type="email" id="surel" name="surel" value="{{ $pengguna->email }}" required maxlength="64">
+        <input type="email" id="surel" name="email" value="{{ $pengguna->email }}" required maxlength="64">
         <span class="error"></span>
 
         <br>

@@ -3,12 +3,20 @@
 @section('container')
     <p>Ini adalah halaman {{ $judul }} sederhana yang dibuat menggunakan HTML</p>
 
+    @if ($errors->any())
+        @foreach ($errors->all() as $err)
+            {{ $err }} <br>
+        @endforeach
+
+        <br>
+    @endif
+
     <form action="/submenu/update/{{ $submenu->id }}" method="post" novalidate>
         @method('PUT')
         @csrf
         
         <label for="menu">menu:</label>
-        <select id="menu" name="menu" required>
+        <select id="menu" name="menu_id" required>
             @foreach ($menu as $mn)
                 <option value="{{ $mn->id }}"  {{ ($mn->id == $submenu->menu_id) ? 'selected' : ''; }}>{{ $mn->name }}</option>
             @endforeach
@@ -18,13 +26,13 @@
         <br>
 
         <label for="nama">nama:</label>
-        <input type="text" id="nama" name="nama" value="{{ $submenu->name }}" required maxlength="32">
+        <input type="text" id="nama" name="name" value="{{ $submenu->name }}" required maxlength="32">
         <span class="error"></span>
 
         <br>
 
         <label for="posisi">posisi:</label>
-        <input type="text" id="posisi" name="posisi" value="{{ $submenu->position }}" required maxlength="4">
+        <input type="text" id="posisi" name="position" value="{{ $submenu->position }}" required maxlength="4">
         <span class="error"></span>
 
         <br>

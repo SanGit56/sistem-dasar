@@ -3,6 +3,14 @@
 @section('container')
     <p>Ini adalah halaman {{ $judul }} sederhana yang dibuat menggunakan HTML</p>
 
+    @if ($errors->any())
+        @foreach ($errors->all() as $err)
+            {{ $err }} <br>
+        @endforeach
+
+        <br>
+    @endif
+
     <form action="/role/insert" method="post" enctype="multipart/form-data" novalidate>
         @csrf
         

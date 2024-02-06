@@ -3,29 +3,37 @@
 @section('container')
     <p>Ini adalah halaman {{ $judul }} sederhana yang dibuat menggunakan HTML</p>
 
+    @if ($errors->any())
+        @foreach ($errors->all() as $err)
+            {{ $err }} <br>
+        @endforeach
+
+        <br>
+    @endif
+
     <form action="/user/insert" method="post" enctype="multipart/form-data" novalidate>
         @csrf
         
         <label for="nama-pengguna">nama pengguna:</label>
-        <input type="text" id="nama-pengguna" name="namapengguna" required maxlength="16">
+        <input type="text" id="nama-pengguna" name="username" required maxlength="16">
         <span class="error"></span>
 
         <br>
 
         <label for="nama">nama:</label>
-        <input type="text" id="nama" name="nama" required maxlength="64">
+        <input type="text" id="nama" name="name" required maxlength="64">
         <span class="error"></span>
 
         <br>
 
         <label for="surel">surel:</label>
-        <input type="email" id="surel" name="surel" required maxlength="64">
+        <input type="email" id="surel" name="email" required maxlength="64">
         <span class="error"></span>
 
         <br>
 
         <label for="kata-sandi">kata sandi:</label>
-        <input type="password" id="kata-sandi" name="katasandi" required minlength="8">
+        <input type="password" id="kata-sandi" name="password" required minlength="8">
         <span class="error"></span>
 
         <br>

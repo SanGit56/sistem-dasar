@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -30,16 +31,29 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'username' => 'required|unique:users|max:16',
+            'name' => 'required|max:64',
+            'email' => 'required|unique:users|max:64',
+            'password' => 'required|min:8'
+        ]);
+
         $pengguna = new User;
 
-        $pengguna->username = $request->namapengguna;
-        $pengguna->name = $request->nama;
-        $pengguna->email = $request->surel;
-        $pengguna->password = $request->katasandi;
+        $pengguna->username = $request->username;
+        $pengguna->name = $request->name;
+        $pengguna->email = $request->email;
+        $pengguna->password = $request->password;
         $pengguna->status = ($request->status == 'on') ? 1 : 0;
         $pengguna->profile_picture = $request->foto;
         $pengguna->remember_token = csrf_token();
         $pengguna->save();
+
+        if ($pengguna) {
+            Session::flash('pesan', 'berhasil menambah data');
+        } else {
+            Session::flash('pesan', 'gagal menambah data');
+        }
 
         return redirect('/user');
     }
@@ -53,13 +67,26 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
+        $validated = $request->validate([
+            'username' => 'required|unique:users|max:16',
+            'name' => 'required|max:64',
+            'email' => 'required|unique:users|max:64',
+            'password' => 'required|min:8'
+        ]);
+
         $pengguna = User::findOrFail($id);
 
-        $pengguna->username = $request->namapengguna;
-        $pengguna->name = $request->nama;
-        $pengguna->email = $request->surel;
+        $pengguna->username = $request->username;
+        $pengguna->name = $request->name;
+        $pengguna->email = $request->email;
         $pengguna->status = ($request->status == 'on') ? 1 : 0;
         $pengguna->save();
+
+        if ($pengguna) {
+            Session::flash('pesan', 'berhasil mengubah data');
+        } else {
+            Session::flash('pesan', 'gagal mengubah data');
+        }
 
         return redirect('/user');
     }

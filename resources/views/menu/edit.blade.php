@@ -3,6 +3,14 @@
 @section('container')
     <p>Ini adalah halaman {{ $judul }} sederhana yang dibuat menggunakan HTML</p>
 
+    @if ($errors->any())
+        @foreach ($errors->all() as $err)
+            {{ $err }} <br>
+        @endforeach
+
+        <br>
+    @endif
+
     <form action="/menu/update/{{ $menu->id }}" method="post" novalidate>
         @method('PUT')
         @csrf

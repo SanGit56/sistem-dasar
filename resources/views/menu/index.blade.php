@@ -5,6 +5,10 @@
 
   <p>Ini adalah halaman {{ $judul }} sederhana yang dibuat menggunakan HTML</p>
 
+  @if (Session::has('pesan'))
+      {{ Session::get('pesan') }}
+  @endif
+
   <table border=1>
     <tr>
         <th>id</th>

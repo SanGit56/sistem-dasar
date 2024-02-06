@@ -3,11 +3,19 @@
 @section('container')
     <p>Ini adalah halaman {{ $judul }} sederhana yang dibuat menggunakan HTML</p>
 
+    @if ($errors->any())
+        @foreach ($errors->all() as $err)
+            {{ $err }} <br>
+        @endforeach
+
+        <br>
+    @endif
+
     <form action="/submenu/insert" method="post" enctype="multipart/form-data" novalidate>
         @csrf
         
         <label for="menu">menu:</label>
-        <select id="menu" name="menu" required>
+        <select id="menu" name="menu_id" required>
             <option value="" disabled selected>--- pilih menu ---</option>
 
             @foreach ($menu as $mn)
@@ -19,13 +27,13 @@
         <br>
 
         <label for="nama">nama:</label>
-        <input type="text" id="nama" name="nama" required maxlength="32">
+        <input type="text" id="nama" name="name" required maxlength="32">
         <span class="error"></span>
 
         <br>
 
         <label for="posisi">posisi:</label>
-        <input type="text" id="posisi" name="posisi" required maxlength="4">
+        <input type="text" id="posisi" name="position" required maxlength="4">
         <span class="error"></span>
 
         <br>
