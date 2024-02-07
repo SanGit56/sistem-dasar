@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 
 class LogController extends Controller
 {
-    public function show()
+    public function show(Request $request)
     {
-        $catatan = Log::get();
+        $kata_kunci = $request->cari;
+        $catatan = Log::where('user_id', 'LIKE', '%'.$kata_kunci.'%')
+                    ->orWhere('description', 'LIKE', '%'.$kata_kunci.'%')
+                    ->paginate(7);
         
         return view('log.index', ['judul' => 'Catatan', 'catat' => $catatan]);
     }

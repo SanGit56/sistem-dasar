@@ -13,6 +13,6 @@ class SubmenuSeeder extends Seeder
      */
     public function run(): void
     {
-        Submenu::factory()->count(5)->create();
+        Submenu::factory()->count(25)->create();
     }
 }

@@ -9,9 +9,13 @@ use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $pengguna = User::get();
+        $kata_kunci = $request->cari;
+        $pengguna = User::where('username', 'LIKE', '%'.$kata_kunci.'%')
+                        ->orWhere('name', 'LIKE', '%'.$kata_kunci.'%')
+                        ->orWhere('email', 'LIKE', '%'.$kata_kunci.'%')
+                        ->paginate(7);
         
         return view('user.index', ['judul' => 'Pengguna', 'pengguna' => $pengguna]);
     }

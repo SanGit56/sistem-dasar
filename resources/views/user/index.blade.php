@@ -6,6 +6,11 @@
 
   <p>Ini adalah halaman {{ $judul }} sederhana yang dibuat menggunakan HTML</p>
 
+  <form action="" method="GET">
+    <input type="text" id="cari" name="cari" placeholder="ketik nama">
+    <button>cari</button>
+  </form>
+
   @if (Session::has('pesan'))
       {{ Session::get('pesan') }}
   @endif
@@ -43,4 +48,6 @@
         </tr>
       @endforeach
   </table>
+
+  {{ $pengguna->withQueryString()->links() }}
 @endsection

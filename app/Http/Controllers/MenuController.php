@@ -8,9 +8,12 @@ use Illuminate\Support\Facades\Session;
 
 class MenuController extends Controller
 {
-    public function show()
+    public function show(Request $request)
     {
-        $menu = Menu::get();
+        $kata_kunci = $request->cari;
+        $menu = Menu::where('name', 'LIKE', '%'.$kata_kunci.'%')
+                    ->orWhere('description', 'LIKE', '%'.$kata_kunci.'%')
+                    ->paginate(7);
         
         return view('menu.index', ['judul' => 'Menu', 'menu' => $menu]);
     }

@@ -13,6 +13,6 @@ class LogSeeder extends Seeder
      */
     public function run(): void
     {
-        Log::factory()->count(5)->create();
+        Log::factory()->count(25)->create();
     }
 }

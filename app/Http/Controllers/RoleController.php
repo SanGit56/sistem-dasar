@@ -8,9 +8,12 @@ use Illuminate\Support\Facades\Session;
 
 class RoleController extends Controller
 {
-    public function show()
+    public function show(Request $request)
     {
-        $peran = Role::get();
+        $kata_kunci = $request->cari;
+        $peran = Role::where('name', 'LIKE', '%'.$kata_kunci.'%')
+                    ->orWhere('description', 'LIKE', '%'.$kata_kunci.'%')
+                    ->paginate(7);
         
         return view('role.index', ['judul' => 'Peran', 'peran' => $peran]);
     }

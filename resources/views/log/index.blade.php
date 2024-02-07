@@ -3,6 +3,11 @@
 @section('container')
   <p>Ini adalah halaman {{ $judul }} sederhana yang dibuat menggunakan HTML</p>
 
+  <form action="" method="GET">
+    <input type="text" id="cari" name="cari" placeholder="ketik nama">
+    <button>cari</button>
+  </form>
+
   <table border=1>
     <tr>
         <th>id</th>
@@ -26,4 +31,6 @@
         </tr>
       @endforeach
   </table>
+
+  {{ $catat->withQueryString()->links() }}
 @endsection

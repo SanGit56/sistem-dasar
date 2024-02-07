@@ -9,9 +9,10 @@ use Illuminate\Support\Facades\Session;
 
 class SubmenuController extends Controller
 {
-    public function show()
+    public function show(Request $request)
     {
-        $submenu = Submenu::get();
+        $kata_kunci = $request->cari;
+        $submenu = Submenu::where('name', 'LIKE', '%'.$kata_kunci.'%')->paginate(7);
         
         return view('submenu.index', ['judul' => 'Submenu', 'submenu' => $submenu]);
     }
