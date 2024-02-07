@@ -64,4 +64,39 @@ class RoleController extends Controller
 
         return redirect('/role');
     }
+
+    public function destroy($id)
+    {
+        $role = Role::findOrFail($id);
+
+        $role->delete();
+
+        if ($role) {
+            Session::flash('pesan', 'berhasil menghapus data');
+        } else {
+            Session::flash('pesan', 'gagal menghapus data');
+        }
+
+        return redirect('/role');
+    }
+
+    public function trash()
+    {
+        $peran = Role::onlyTrashed()->get();
+
+        return view('role.deleted', ['judul' => 'Peran Terhapus', 'peran' => $peran]);
+    }
+
+    public function restore($id)
+    {
+        $peran = Role::withTrashed()->where('id', $id)->restore();
+
+        if ($peran) {
+            Session::flash('pesan', 'berhasil memulihkan data');
+        } else {
+            Session::flash('pesan', 'gagal memulihkan data');
+        }
+
+        return redirect('/role-deleted');
+    }
 }

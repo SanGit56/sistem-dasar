@@ -80,4 +80,39 @@ class SubmenuController extends Controller
 
         return redirect('/submenu');
     }
+
+    public function destroy($id)
+    {
+        $submenu = Submenu::findOrFail($id);
+
+        $submenu->delete();
+
+        if ($submenu) {
+            Session::flash('pesan', 'berhasil menghapus data');
+        } else {
+            Session::flash('pesan', 'gagal menghapus data');
+        }
+
+        return redirect('/submenu');
+    }
+
+    public function trash()
+    {
+        $submenu = Submenu::onlyTrashed()->get();
+
+        return view('submenu.deleted', ['judul' => 'Submenu Terhapus', 'submenu' => $submenu]);
+    }
+
+    public function restore($id)
+    {
+        $submenu = Submenu::withTrashed()->where('id', $id)->restore();
+
+        if ($submenu) {
+            Session::flash('pesan', 'berhasil memulihkan data');
+        } else {
+            Session::flash('pesan', 'gagal memulihkan data');
+        }
+
+        return redirect('/submenu-deleted');
+    }
 }

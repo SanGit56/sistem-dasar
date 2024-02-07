@@ -1,9 +1,6 @@
 @extends('layout/main')
 
 @section('container')
-  <a href="/user-add">tambah</a>
-  <a href="/user-deleted">tempat sampah</a>
-
   <p>Ini adalah halaman {{ $judul }} sederhana yang dibuat menggunakan HTML</p>
 
   @if (Session::has('pesan'))
@@ -30,17 +27,11 @@
             <td>{{ $pgn->password }}</td>
             <td>{{ $pgn->status }}</td>
             <td>
-              <a href="user/{{ $pgn->id }}">detail</a>
-              <a href="/user-edit/{{ $pgn->id }}">ubah</a>
-              
-              <form action="/user/delete/{{ $pgn->id }}" method="POST">
-                @method('delete')
-                @csrf
-  
-                <button onclick="return confirm('yakin?')">hapus</button>
-              </form>
+              <a href="/user/restore/{{ $pgn->id }}">pulihkan</a>
             </td>
         </tr>
       @endforeach
   </table>
+
+  <a href="../user">kembali</a>
 @endsection

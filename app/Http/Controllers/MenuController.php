@@ -63,4 +63,39 @@ class MenuController extends Controller
         }
         return redirect('/menu');
     }
+
+    public function destroy($id)
+    {
+        $menu = Menu::findOrFail($id);
+
+        $menu->delete();
+
+        if ($menu) {
+            Session::flash('pesan', 'berhasil menghapus data');
+        } else {
+            Session::flash('pesan', 'gagal menghapus data');
+        }
+
+        return redirect('/menu');
+    }
+
+    public function trash()
+    {
+        $menu = Menu::onlyTrashed()->get();
+
+        return view('menu.deleted', ['judul' => 'Menu Terhapus', 'menu' => $menu]);
+    }
+
+    public function restore($id)
+    {
+        $menu = Menu::withTrashed()->where('id', $id)->restore();
+
+        if ($menu) {
+            Session::flash('pesan', 'berhasil memulihkan data');
+        } else {
+            Session::flash('pesan', 'gagal memulihkan data');
+        }
+
+        return redirect('/menu-deleted');
+    }
 }

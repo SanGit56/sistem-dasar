@@ -1,9 +1,6 @@
 @extends('layout/main')
 
 @section('container')
-  <a href="/menu-add">tambah</a>
-  <a href="/menu-deleted">tempat sampah</a>
-
   <p>Ini adalah halaman {{ $judul }} sederhana yang dibuat menggunakan HTML</p>
 
   @if (Session::has('pesan'))
@@ -24,17 +21,11 @@
             <td>{{ $mn->name }}</td>
             <td>{{ $mn->description }}</td>
             <td>
-              <a href="">detail</a>
-              <a href="/menu-edit/{{ $mn->id }}">ubah</a>
-              
-              <form action="/menu/delete/{{ $mn->id }}" method="POST">
-                @method('delete')
-                @csrf
-  
-                <button onclick="return confirm('yakin?')">hapus</button>
-              </form>
+              <a href="/menu/restore/{{ $mn->id }}">pulihkan</a>
             </td>
         </tr>
       @endforeach
   </table>
+
+  <a href="../menu">kembali</a>
 @endsection

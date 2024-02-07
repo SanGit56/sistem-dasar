@@ -90,4 +90,39 @@ class UserController extends Controller
 
         return redirect('/user');
     }
+
+    public function destroy($id)
+    {
+        $pengguna = User::findOrFail($id);
+
+        $pengguna->delete();
+
+        if ($pengguna) {
+            Session::flash('pesan', 'berhasil menghapus data');
+        } else {
+            Session::flash('pesan', 'gagal menghapus data');
+        }
+
+        return redirect('/user');
+    }
+
+    public function trash()
+    {
+        $pengguna = User::onlyTrashed()->get();
+
+        return view('user.deleted', ['judul' => 'Pengguna Terhapus', 'pengguna' => $pengguna]);
+    }
+
+    public function restore($id)
+    {
+        $pengguna = User::withTrashed()->where('id', $id)->restore();
+
+        if ($pengguna) {
+            Session::flash('pesan', 'berhasil memulihkan data');
+        } else {
+            Session::flash('pesan', 'gagal memulihkan data');
+        }
+
+        return redirect('/user-deleted');
+    }
 }

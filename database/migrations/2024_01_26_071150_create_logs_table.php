@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('browser', 32)->nullable();
             $table->string('description', 64)->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

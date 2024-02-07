@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('position', 4);
             $table->boolean('is_active');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
