@@ -3,6 +3,12 @@
 @section('container')
   <p>Ini adalah halaman {{ $judul }} sederhana yang dibuat menggunakan HTML</p>
 
+  @if ($pengguna->profile_picture != '')
+    <img src="{{ asset('storage/' . $pengguna->profile_picture) }}" alt="tidak ada foto" width="200" height="200">
+  @else
+    <img src="{{ asset('storage/IMG_20220325_113754.jpg') }}" alt="tidak ada foto" width="200" height="200">
+  @endif
+
   <table border=1>
     <tr>
         <th>id</th>
@@ -21,6 +27,7 @@
         <td>{{ $pengguna->email }}</td>
         <td>{{ $pengguna->password }}</td>
         <td>{{ $pengguna->status }}</td>
+        <td>{{ $pengguna->profile_picture }}</td>
         <td>
           @foreach ($pengguna->roles as $pgn_prn)
               - {{ $pgn_prn->id }} {{ $pgn_prn->name }} <br>

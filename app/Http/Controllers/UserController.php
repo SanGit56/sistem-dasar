@@ -49,7 +49,12 @@ class UserController extends Controller
         $pengguna->email = $request->email;
         $pengguna->password = $request->password;
         $pengguna->status = ($request->status == 'on') ? 1 : 0;
-        $pengguna->profile_picture = $request->foto;
+
+        if ($request->file('foto')) {
+            $request->file('foto')->storeAs('', $request->foto->getClientOriginalName());
+            $pengguna->profile_picture = $request->foto->getClientOriginalName();
+        }
+
         $pengguna->remember_token = csrf_token();
         $pengguna->save();
 

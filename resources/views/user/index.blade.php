@@ -34,6 +34,7 @@
             <td>{{ $pgn->email }}</td>
             <td>{{ $pgn->password }}</td>
             <td>{{ $pgn->status }}</td>
+            <td>{{ $pgn->profile_picture }}</td>
             <td>
               <a href="user/{{ $pgn->id }}">detail</a>
               <a href="/user-edit/{{ $pgn->id }}">ubah</a>
