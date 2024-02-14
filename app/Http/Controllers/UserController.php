@@ -134,4 +134,24 @@ class UserController extends Controller
 
         return redirect('/user-deleted');
     }
+
+    public function update_picture(Request $request, $id)
+    {
+        $pengguna = User::findOrFail($id);
+
+        if ($request->foto) {
+            $request->file('foto')->storeAs('', $request->foto->getClientOriginalName());
+            $pengguna->profile_picture = $request->foto->getClientOriginalName();
+
+            $pengguna->save();
+
+            if ($pengguna) {
+                Session::flash('pesan', 'berhasil mengganti foto');
+            } else {
+                Session::flash('pesan', 'gagal mengganti foto');
+            }
+        }
+
+        return redirect('/user');
+    }
 }

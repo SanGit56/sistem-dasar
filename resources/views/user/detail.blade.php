@@ -6,7 +6,7 @@
   @if ($pengguna->profile_picture != '')
     <img src="{{ asset('storage/' . $pengguna->profile_picture) }}" alt="tidak ada foto" width="200" height="200">
   @else
-    <img src="{{ asset('storage/IMG_20220325_113754.jpg') }}" alt="tidak ada foto" width="200" height="200">
+    <p>anda belum punya foto</p>
   @endif
 
   <table border=1>

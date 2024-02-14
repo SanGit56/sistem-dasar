@@ -65,4 +65,9 @@ Route::delete('/submenu/delete/{id}', [SubmenuController::class, 'destroy'])->mi
 Route::get('/submenu-deleted', [SubmenuController::class, 'trash'])->middleware('auth');
 Route::get('/submenu/restore/{id}', [SubmenuController::class, 'restore'])->middleware('auth');
 
+Route::get('/user-change-pic', function () {
+    return view('user.change_pic', ['judul' => 'Ganti Foto']);
+})->middleware('auth');
+Route::put('/user/change-pic/{id}', [UserController::class, 'update_picture'])->middleware('auth');
+
 Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth');

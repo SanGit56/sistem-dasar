@@ -23,6 +23,7 @@
         <th>email</th>
         <th>password</th>
         <th>status</th>
+        <th>foto</th>
         <th>aksi</th>
     </tr>
 
