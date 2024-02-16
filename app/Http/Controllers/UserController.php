@@ -154,4 +154,28 @@ class UserController extends Controller
 
         return redirect('/user');
     }
+
+    public function update_password(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'sandilama' => 'required',
+            'sandibaru' => 'required|min:8',
+            'sandilagi' => 'required|min:8',
+        ]);
+
+        $pengguna = User::findOrFail($id);
+
+        if (password_verify($request->sandilama, $pengguna->password)) {
+            $pengguna->password = $request->sandibaru;
+            $pengguna->save();
+
+            Session::flash('pesan', 'berhasil mengubah sandi');
+
+            return redirect('/user');
+        } else {
+            return back()
+            ->withErrors('sandi lama tidak sama')
+            ->onlyInput('sandilama');
+        }
+    }
 }

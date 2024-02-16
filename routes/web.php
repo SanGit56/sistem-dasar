@@ -69,5 +69,9 @@ Route::get('/user-change-pic', function () {
     return view('user.change_pic', ['judul' => 'Ganti Foto']);
 })->middleware('auth');
 Route::put('/user/change-pic/{id}', [UserController::class, 'update_picture'])->middleware('auth');
+Route::get('/user-change-pw', function () {
+    return view('user.change_pw', ['judul' => 'Ganti Kata Sandi']);
+})->middleware('auth');
+Route::put('/user/change-pw/{id}', [UserController::class, 'update_password'])->middleware('auth');
 
 Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth');

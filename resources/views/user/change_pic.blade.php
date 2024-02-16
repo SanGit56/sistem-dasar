@@ -21,5 +21,5 @@
         <input type="submit" value="kirim">
     </form>
 
-    <a href="../user">kembali</a>
+    <a href="../">kembali</a>
 @endsection
