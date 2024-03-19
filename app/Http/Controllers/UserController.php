@@ -152,7 +152,7 @@ class UserController extends Controller
             }
         }
 
-        return redirect('/user');
+        return redirect('/user-change-pic');
     }
 
     public function update_password(Request $request, $id)
