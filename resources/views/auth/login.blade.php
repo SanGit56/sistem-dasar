@@ -37,6 +37,7 @@
             <input type="submit" value="masuk">
         </form>
 
+        <a href="/signup">daftar</a>
         <a href="/">beranda</a>
 
         <script>

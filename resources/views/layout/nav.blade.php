@@ -12,6 +12,7 @@
         {{-- <a href="/lupa-sandi">Lupa Sandi</a> --}}
         <a href="/logout">Logout</a>
     @else
-        <a href="/login">Login</a>
+        <a href="/login">Log in</a>
+        <a href="/signup">Sign up</a>
     @endif
 </nav>

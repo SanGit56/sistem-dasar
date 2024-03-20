@@ -26,6 +26,9 @@ Route::get('/', function () {
 Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
 Route::post('/authenticate', [AuthController::class, 'authenticate'])->middleware('guest');
 
+Route::get('/signup', [AuthController::class, 'signup'])->name('signup')->middleware('guest');
+Route::post('/register', [AuthController::class, 'register'])->middleware('guest');
+
 Route::get('/user', [UserController::class, 'index']);
 Route::get('/user/{id}', [UserController::class, 'show'])->middleware('auth');
 Route::get('/user-add', [UserController::class, 'create'])->middleware('auth');
