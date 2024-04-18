@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Token;
+use App\Mail\KirimSurel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
@@ -43,6 +46,13 @@ class AuthController extends Controller
             ->onlyInput('username');
     }
 
+    protected function send_email($data_email)
+    {
+        Mail::to($data_email['surel_penerima'])->send(new KirimSurel($data_email));
+    
+        return "Surel berhasil dikirim";
+    }
+
     public function signup()
     {
         return view('auth.signup', ['judul' => 'Daftar']);
@@ -57,6 +67,7 @@ class AuthController extends Controller
             'password' => 'required|min:8'
         ]);
 
+        // tambah data pengguna (belum aktif)
         $pengguna = new User;
         $pengguna->username = $request->username;
         $pengguna->name = $request->name;
@@ -65,6 +76,23 @@ class AuthController extends Controller
         $pengguna->status = 0;
         $pengguna->remember_token = csrf_token();
         $pengguna->save();
+
+        // tambah data token untuk aktivasi
+        $no_token = rand();
+        $token = new Token;
+        $token->email = $request->email;
+        $token->token = $no_token;
+        $token->save();
+
+        $data_email = [
+            'surel_penerima' => $request->email,
+            'nama_penerima' => $request->name,
+            'surel_pengirim' => 'memeforacookie@gmail.com',
+            'nama_pengirim' =>'mKlinik',
+            'subyek' => 'Verifikasi Akun',
+        ];
+
+        $this->send_email($data_email);
 
         if ($pengguna) {
             Session::flash('pesan', 'berhasil daftar akun');
