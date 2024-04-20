@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Menu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class MenuController extends Controller
@@ -33,6 +35,8 @@ class MenuController extends Controller
         $menu = Menu::create($request->all());
 
         if ($menu) {
+            Log::channel('data')->info(Auth::user()->username . ' menambah data menu ' . $request->name);
+            
             Session::flash('pesan', 'berhasil menambah data');
         } else {
             Session::flash('pesan', 'gagal menambah data');
@@ -60,6 +64,8 @@ class MenuController extends Controller
         $menu->update($request->all());
 
         if ($menu) {
+            Log::channel('data')->info(Auth::user()->username . ' menyunting data menu ' . $request->name);
+
             Session::flash('pesan', 'berhasil mengubah data');
         } else {
             Session::flash('pesan', 'gagal mengubah data');
@@ -74,6 +80,8 @@ class MenuController extends Controller
         $menu->delete();
 
         if ($menu) {
+            Log::channel('data')->info(Auth::user()->username . ' menghapus data menu ' . $menu->name);
+
             Session::flash('pesan', 'berhasil menghapus data');
         } else {
             Session::flash('pesan', 'gagal menghapus data');
@@ -94,6 +102,8 @@ class MenuController extends Controller
         $menu = Menu::withTrashed()->where('id', $id)->restore();
 
         if ($menu) {
+            Log::channel('data')->info(Auth::user()->username . ' mengembalikan data menu');
+
             Session::flash('pesan', 'berhasil memulihkan data');
         } else {
             Session::flash('pesan', 'gagal memulihkan data');

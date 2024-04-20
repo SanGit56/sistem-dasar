@@ -4,7 +4,6 @@
     <a href="/role">Peran</a>
     <a href="/menu">Menu</a>
     <a href="/submenu">Submenu</a>
-    <a href="/log">Catatan</a>
 
     @if ((Auth::user()))
         <a href="/user-change-pic">Ganti Foto</a>

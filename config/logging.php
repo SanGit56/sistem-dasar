@@ -54,8 +54,15 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single'],
+            'channels' => ['single', 'data'],
             'ignore_exceptions' => false,
+        ],
+
+        'data' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/data.log'),
+            'level' => 'info',
+            'replace_placeholders' => true,
         ],
 
         'single' => [

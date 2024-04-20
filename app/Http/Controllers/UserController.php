@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
@@ -59,6 +61,8 @@ class UserController extends Controller
         $pengguna->save();
 
         if ($pengguna) {
+            Log::channel('data')->info(Auth::user()->username . ' menambah data pengguna ' . $request->username);
+            
             Session::flash('pesan', 'berhasil menambah data');
         } else {
             Session::flash('pesan', 'gagal menambah data');
@@ -77,10 +81,9 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'username' => 'required|unique:users|max:16',
+            'username' => 'required|max:16',
             'name' => 'required|max:64',
-            'email' => 'required|unique:users|max:64',
-            'password' => 'required|min:8'
+            'email' => 'required|max:64'
         ]);
 
         $pengguna = User::findOrFail($id);
@@ -92,6 +95,8 @@ class UserController extends Controller
         $pengguna->save();
 
         if ($pengguna) {
+            Log::channel('data')->info(Auth::user()->username . ' menyunting data pengguna ' . $request->username);
+
             Session::flash('pesan', 'berhasil mengubah data');
         } else {
             Session::flash('pesan', 'gagal mengubah data');
@@ -107,6 +112,8 @@ class UserController extends Controller
         $pengguna->delete();
 
         if ($pengguna) {
+            Log::channel('data')->info(Auth::user()->username . ' menghapus data pengguna ' . $pengguna->username);
+
             Session::flash('pesan', 'berhasil menghapus data');
         } else {
             Session::flash('pesan', 'gagal menghapus data');
@@ -127,6 +134,8 @@ class UserController extends Controller
         $pengguna = User::withTrashed()->where('id', $id)->restore();
 
         if ($pengguna) {
+            Log::channel('data')->info(Auth::user()->username . ' mengembalikan data pengguna');
+
             Session::flash('pesan', 'berhasil memulihkan data');
         } else {
             Session::flash('pesan', 'gagal memulihkan data');
@@ -146,6 +155,8 @@ class UserController extends Controller
             $pengguna->save();
 
             if ($pengguna) {
+                Log::channel('data')->info(Auth::user()->username . ' mengganti foto');
+
                 Session::flash('pesan', 'berhasil mengganti foto');
             } else {
                 Session::flash('pesan', 'gagal mengganti foto');
@@ -168,6 +179,8 @@ class UserController extends Controller
         if (password_verify($request->sandilama, $pengguna->password)) {
             $pengguna->password = $request->sandibaru;
             $pengguna->save();
+
+            Log::channel('data')->info(Auth::user()->username . ' mengganti kata sandi');
 
             Session::flash('pesan', 'berhasil mengubah sandi');
 

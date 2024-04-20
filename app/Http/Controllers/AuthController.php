@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Token;
 use App\Mail\KirimSurel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
@@ -36,10 +37,14 @@ class AuthController extends Controller
                 foreach ($pengguna->roles as $peran) {
                     $menu = array_merge($menu, $peran->menus()->with('submenus')->get()->toArray());
                 }
+
+                Log::channel('data')->info(Auth::user()->username . ' masuk');
     
                 return redirect()->intended('/');
             }
         }
+
+        Log::channel('data')->info($request->username . ' upaya masuk');
 
         return back()
             ->withErrors('username atau password salah')
@@ -92,9 +97,11 @@ class AuthController extends Controller
             'subyek' => 'Verifikasi Akun',
         ];
 
-        $this->send_email($data_email);
+        // $this->send_email($data_email);
 
         if ($pengguna) {
+            Log::channel('data')->info($request->username . ' mendaftar');
+            
             Session::flash('pesan', 'berhasil daftar akun');
         } else {
             Session::flash('pesan', 'gagal daftar akun');
@@ -105,6 +112,8 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
+        Log::channel('data')->info(Auth::user()->username . ' keluar');
+
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();

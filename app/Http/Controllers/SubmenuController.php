@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Menu;
 use App\Models\Submenu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class SubmenuController extends Controller
@@ -41,6 +43,8 @@ class SubmenuController extends Controller
         $submenu->save();
 
         if ($submenu) {
+            Log::channel('data')->info(Auth::user()->username . ' menambah data submenu ' . $request->name);
+            
             Session::flash('pesan', 'berhasil menambah data');
         } else {
             Session::flash('pesan', 'gagal menambah data');
@@ -74,6 +78,8 @@ class SubmenuController extends Controller
         $submenu->save();
 
         if ($submenu) {
+            Log::channel('data')->info(Auth::user()->username . ' menyunting data submenu ' . $request->name);
+
             Session::flash('pesan', 'berhasil mengubah data');
         } else {
             Session::flash('pesan', 'gagal mengubah data');
@@ -89,6 +95,8 @@ class SubmenuController extends Controller
         $submenu->delete();
 
         if ($submenu) {
+            Log::channel('data')->info(Auth::user()->username . ' menghapus data submenu ' . $submenu->name);
+
             Session::flash('pesan', 'berhasil menghapus data');
         } else {
             Session::flash('pesan', 'gagal menghapus data');
@@ -109,6 +117,8 @@ class SubmenuController extends Controller
         $submenu = Submenu::withTrashed()->where('id', $id)->restore();
 
         if ($submenu) {
+            Log::channel('data')->info(Auth::user()->username . ' mengembalikan data submenu');
+
             Session::flash('pesan', 'berhasil memulihkan data');
         } else {
             Session::flash('pesan', 'gagal memulihkan data');

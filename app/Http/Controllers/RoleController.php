@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class RoleController extends Controller
@@ -33,6 +35,8 @@ class RoleController extends Controller
         $peran = Role::create($request->all());
 
         if ($peran) {
+            Log::channel('data')->info(Auth::user()->username . ' menambah data peran ' . $request->name);
+            
             Session::flash('pesan', 'berhasil menambah data');
         } else {
             Session::flash('pesan', 'gagal menambah data');
@@ -60,6 +64,8 @@ class RoleController extends Controller
         $peran->update($request->all());
 
         if ($peran) {
+            Log::channel('data')->info(Auth::user()->username . ' menyunting data peran ' . $request->name);
+
             Session::flash('pesan', 'berhasil mengubah data');
         } else {
             Session::flash('pesan', 'gagal mengubah data');
@@ -70,11 +76,13 @@ class RoleController extends Controller
 
     public function destroy($id)
     {
-        $role = Role::findOrFail($id);
+        $peran = Role::findOrFail($id);
 
-        $role->delete();
+        $peran->delete();
 
-        if ($role) {
+        if ($peran) {
+            Log::channel('data')->info(Auth::user()->username . ' menghapus data peran ' . $peran->name);
+
             Session::flash('pesan', 'berhasil menghapus data');
         } else {
             Session::flash('pesan', 'gagal menghapus data');
@@ -95,6 +103,8 @@ class RoleController extends Controller
         $peran = Role::withTrashed()->where('id', $id)->restore();
 
         if ($peran) {
+            Log::channel('data')->info(Auth::user()->username . ' mengembalikan data peran');
+
             Session::flash('pesan', 'berhasil memulihkan data');
         } else {
             Session::flash('pesan', 'gagal memulihkan data');

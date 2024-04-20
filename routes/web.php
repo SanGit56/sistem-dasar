@@ -57,8 +57,6 @@ Route::delete('/menu/delete/{id}', [MenuController::class, 'destroy'])->middlewa
 Route::get('/menu-deleted', [MenuController::class, 'trash'])->middleware('auth');
 Route::get('/menu/restore/{id}', [MenuController::class, 'restore'])->middleware('auth');
 
-Route::get('/log', [LogController::class, 'show']);
-
 Route::get('/submenu', [SubmenuController::class, 'show']);
 Route::get('/submenu-add', [SubmenuController::class, 'create'])->middleware('auth');
 Route::post('/submenu/insert', [SubmenuController::class, 'store'])->middleware('auth');
