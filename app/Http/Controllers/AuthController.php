@@ -33,9 +33,10 @@ class AuthController extends Controller
                 $request->session()->regenerate();
 
                 $pengguna = User::find(Auth::user()->id);
-                $menu = [];
+                $data_menu = [];
                 foreach ($pengguna->roles as $peran) {
-                    $menu = array_merge($menu, $peran->menus()->with('submenus')->get()->toArray());
+                    $data_menu = array_merge($data_menu, $peran->menus()->with('submenus')->get()->toArray());
+                    session(['sesi_menu' => $data_menu]);
                 }
 
                 Log::channel('data')->info(Auth::user()->username . ' masuk');
