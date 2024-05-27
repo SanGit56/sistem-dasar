@@ -10,7 +10,9 @@
             $menu = session('sesi_menu');
 
             foreach ($menu as $m) {
-                echo '<a href="/' . strtolower($m["name"]) . '">' . $m["id"] . $m["name"] . '</a>';
+                foreach ($m['submenus'] as $sm) {
+                    echo '<a href="/' . strtolower(preg_replace('/\s+/', '', $sm["name"])) . '">' . $sm["id"] . $sm["name"] . '</a>';
+                }
             }
         }
     @endphp
